@@ -1,5 +1,6 @@
 const bp = require('body-parser');
 const eventModel = require('../../models/event_model');
+// const _ = require('lodash');
 
 const eventCtrl = {};
 
@@ -7,13 +8,17 @@ eventCtrl.excessiveRpmEvent = async function (req, res){
 	var imei = req.body.imei;
 	var fromTimestamp = req.body.from_timestamp;
 	var toTimestamp = req.body.to_timestamp;
-	var respA;
-	var respB;
+	var result = [];
+	var respA = [];
+	var respB = [];
 
 	respA = await eventModel.excessiveRpmEvent(imei, fromTimestamp, toTimestamp);
 	respB = await eventModel.speedingEndEvent(imei, fromTimestamp, toTimestamp);
-	
-	console.log(respA, respB);
+	var respB = [{'data': 123456}];
+	result = respB.concat(respA);
+
+
+	res.send(result);
 }
 
 module.exports = eventCtrl;
