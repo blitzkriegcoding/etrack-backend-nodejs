@@ -6,4 +6,6 @@ tripCtrl.post = (req, res) =>{
 
 }
 
-export default tripCtrl;
+module.exports = {
+	tripCtrl
+}
