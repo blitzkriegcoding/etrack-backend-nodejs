@@ -5,7 +5,7 @@ const eventCtrl = require('../../controllers/v3/event_controller');
 const router = express.Router();
 
 // Routes for events
-router.post('/v3/events/can', eventCtrl.excessiveRpmEvent);
+router.post('/v3/events/can', eventCtrl.eventsByCan);
 
 // Routes for Trips
 
