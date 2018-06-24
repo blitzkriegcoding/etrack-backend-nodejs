@@ -13,7 +13,7 @@ eventResultSets = async function(imei, fromTimestamp, toTimestamp) {
 	var hardBrakingEventResultSet = await eventModel.hardBrakingEvent(imei, fromTimestamp, toTimestamp);
 	var fuelLeakEventResultSet = await eventModel.fuelLeakEvent(imei, fromTimestamp, toTimestamp);
 
-	finalResultSet = _.concat(excessiveRpmEventResultSet, speedingEndEventResultSet, excessiveRalentiEventResultSet, coastingEventResultSet, faultCodeEventResultSet, suddenAccelerationEventResultSet, hardBrakingEventResultSet, fuelLeakEventResultSet);
+	finalResultSet = [].concat(excessiveRpmEventResultSet, speedingEndEventResultSet, excessiveRalentiEventResultSet, coastingEventResultSet, faultCodeEventResultSet, suddenAccelerationEventResultSet, hardBrakingEventResultSet, fuelLeakEventResultSet);
 
 	return finalResultSet;
 }
