@@ -1,4 +1,4 @@
-const eventModel = require('../models/event_model');
+const eventModel = require('../models/eventModel');
 const _ = require('lodash');
 
 eventResultSets = async function(imei, fromTimestamp, toTimestamp) {

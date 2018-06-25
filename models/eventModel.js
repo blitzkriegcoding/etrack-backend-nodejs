@@ -1,8 +1,6 @@
 var Connection = require('tedious').Connection;
 var Request = require('tedious').Request;
 var TYPES = require("tedious").TYPES;
-var uuid = require('node-uuid');
-var async = require('async');
 const db = require('../src/dbController');
 
 function excessiveRpmEvent(imei, from_timestamp, to_timestamp) {
@@ -13,7 +11,8 @@ function excessiveRpmEvent(imei, from_timestamp, to_timestamp) {
 	                          INNER JOIN can_event_rpm_event t3 ON (t2._id = t3.can_event_id) \
 	                          where t1.imei = @imei \
 	                          and t1.gps_utc_time between @fromTimestamp \
-	                          and @toTimestamp order by t1.gps_utc_time asc";
+	                          and @toTimestamp \
+                            order by t1.gps_utc_time asc";
 
   db.buildParams(params, "imei", TYPES.BigInt, imei);
   db.buildParams(params, "fromTimestamp", TYPES.DateTime2, from_timestamp);

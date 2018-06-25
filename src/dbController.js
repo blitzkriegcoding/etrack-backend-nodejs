@@ -5,7 +5,7 @@ const dbConfig = require('./dbConfig.js');
 // Avoiding concurrent SQL SERVER calls
 var poolConfig = {
   min: 1,
-  max: 100,
+  max: 1,
   log: true
 };
 
