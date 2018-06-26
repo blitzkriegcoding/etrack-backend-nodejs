@@ -9,5 +9,7 @@ router.post('/v3/events/can', eventCtrl.eventsByCan);
 
 // Routes for Trips
 router.post('/v3/trips/', tripCtrl.getTrips);
+router.post('/v3/trips/positions/', tripCtrl.getTripsPositions);
+router.post('/v3/trips/events/', tripCtrl.getTripsEvents);
 module.exports = router;
 

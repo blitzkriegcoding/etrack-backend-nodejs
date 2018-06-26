@@ -21,7 +21,6 @@ function excessiveRpmEvent(imei, from_timestamp, to_timestamp) {
 
   return new Promise((resolve, reject) => {
 		db.query(params, sqlQuery, result => {
-			// callback(result);	  	
 			return resolve(result);
 	  });
   });
