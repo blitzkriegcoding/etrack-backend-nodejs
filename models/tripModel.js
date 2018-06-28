@@ -6,16 +6,14 @@ const db = require('../src/dbController');
 
 function getFilteredTrips(imei, from_timestamp, to_timestamp) {
   var params = [];
-  var sqlQuery = "select distinct t2.imei, t2.energization_number, t2.trip_number from gps_event_measurement t1\
-                  left outer join can_event t2 on (t1._id = t2.gps_event_measurement_id)\
-                  left join can_event_trip_start_record t3 on (t1._id = t3.can_event_id and t2.trip_number = t3.trip_number and t2.energization_number = t3.energization_number)\
-                  left join can_event_trip_end_record t4 on (t1._id = t4.can_event_id and t2.trip_number = t4.trip_number and t2.energization_number = t4.energization_number)\
-                  where t2.imei is not null and\
-                  t1.imei = @imei\
+  var sqlQuery = "select distinct t1.imei, t1.energization_number, t1.trip_number from can_event t1\
+                  left join can_event_trip_start_record t3 on (t1._id = t3.can_event_id and t1.trip_number = t3.trip_number and t1.energization_number = t3.energization_number)\
+                  left join can_event_trip_end_record t4 on (t1._id = t4.can_event_id and t1.trip_number = t4.trip_number and t1.energization_number = t4.energization_number)\
+                  where t1.imei = @imei\
                   and t1.gps_utc_time between @fromTimestamp \
                   and @toTimestamp \
-                  order by t2.energization_number asc, t2.trip_number asc"
-  db.buildParams(params, "imei", TYPES.BigInt, imei);
+                  order by t1.energization_number asc, t1.trip_number asc"
+  db.buildParams(params, "imei", TYPES.VarChar, imei);
   db.buildParams(params, "fromTimestamp", TYPES.DateTime2, from_timestamp);
   db.buildParams(params, "toTimestamp", TYPES.DateTime2, to_timestamp);
 
@@ -37,7 +35,7 @@ function getTripStart(imei, trip_number, energization_number) {
                   and t1.energization_number = @energizationNumber \
                   order by utc_time asc";
 
-  db.buildParams(params, "imei", TYPES.BigInt, imei);
+  db.buildParams(params, "imei", TYPES.VarChar, imei);
   db.buildParams(params, "tripNumber", TYPES.Int, trip_number);
   db.buildParams(params, "energizationNumber", TYPES.Int, energization_number);
 
@@ -60,7 +58,7 @@ function getTripEnd(imei, trip_number, energization_number) {
                   and t1.energization_number = @energizationNumber \
                   order by utc_time desc";
 
-  db.buildParams(params, "imei", TYPES.BigInt, imei);
+  db.buildParams(params, "imei", TYPES.VarChar, imei);
   db.buildParams(params, "tripNumber", TYPES.Int, trip_number);
   db.buildParams(params, "energizationNumber", TYPES.Int, energization_number);
 
@@ -87,7 +85,7 @@ function getTripPositions(imei, trip_number, energization_number) {
                   AND t1.energization_number = @energizationNumber \
                   ORDER BY gps_utc_time asc";
 
-  db.buildParams(params, "imei", TYPES.BigInt, imei);
+  db.buildParams(params, "imei", TYPES.VarChar, imei);
   db.buildParams(params, "tripNumber", TYPES.Int, trip_number);
   db.buildParams(params, "energizationNumber", TYPES.Int, energization_number);
 
@@ -115,7 +113,7 @@ function getTripExcessiveRpmEvent(imei, trip_number, energization_number) {
                   and t2.energization_number = @energizationNumber \
                   order by t1.gps_utc_time asc";
 
-  db.buildParams(params, "imei", TYPES.BigInt, imei);
+  db.buildParams(params, "imei", TYPES.VarChar, imei);
   db.buildParams(params, "tripNumber", TYPES.Int, trip_number);
   db.buildParams(params, "energizationNumber", TYPES.Int, energization_number);
 
@@ -144,7 +142,7 @@ function getTripSpeedingStartEvent(imei, trip_number, energization_number) {
                   and t2.energization_number = @energizationNumber \
                   order by t1.gps_utc_time asc";
 
-  db.buildParams(params, "imei", TYPES.BigInt, imei);
+  db.buildParams(params, "imei", TYPES.VarChar, imei);
   db.buildParams(params, "tripNumber", TYPES.Int, trip_number);
   db.buildParams(params, "energizationNumber", TYPES.Int, energization_number);
 
@@ -175,7 +173,7 @@ function getTripSpeedingEndEvent(imei, trip_number, energization_number) {
                   order by t1.gps_utc_time asc"
 
 
-  db.buildParams(params, "imei", TYPES.BigInt, imei);
+  db.buildParams(params, "imei", TYPES.VarChar, imei);
   db.buildParams(params, "tripNumber", TYPES.Int, trip_number);
   db.buildParams(params, "energizationNumber", TYPES.Int, energization_number);
 
@@ -203,7 +201,7 @@ function getTripExcessiveRalentiEvent(imei, trip_number, energization_number) {
                   order by t1.gps_utc_time asc"
 
 
-  db.buildParams(params, "imei", TYPES.BigInt, imei);
+  db.buildParams(params, "imei", TYPES.VarChar, imei);
   db.buildParams(params, "tripNumber", TYPES.Int, trip_number);
   db.buildParams(params, "energizationNumber", TYPES.Int, energization_number);
 
@@ -232,7 +230,7 @@ function getTripCoastingEvent(imei, trip_number, energization_number) {
                   order by t1.gps_utc_time asc"
 
 
-  db.buildParams(params, "imei", TYPES.BigInt, imei);
+  db.buildParams(params, "imei", TYPES.VarChar, imei);
   db.buildParams(params, "tripNumber", TYPES.Int, trip_number);
   db.buildParams(params, "energizationNumber", TYPES.Int, energization_number);
 
@@ -265,7 +263,7 @@ function getTripFaultCodeEvent(imei, trip_number, energization_number) {
                   order by t1.gps_utc_time asc"
 
 
-  db.buildParams(params, "imei", TYPES.BigInt, imei);
+  db.buildParams(params, "imei", TYPES.VarChar, imei);
   db.buildParams(params, "tripNumber", TYPES.Int, trip_number);
   db.buildParams(params, "energizationNumber", TYPES.Int, energization_number);
 
@@ -295,7 +293,7 @@ function getTripSuddenAccelerationEvent(imei, trip_number, energization_number) 
                   order by t1.gps_utc_time asc"
 
 
-  db.buildParams(params, "imei", TYPES.BigInt, imei);
+  db.buildParams(params, "imei", TYPES.VarChar, imei);
   db.buildParams(params, "tripNumber", TYPES.Int, trip_number);
   db.buildParams(params, "energizationNumber", TYPES.Int, energization_number);
 
@@ -325,7 +323,7 @@ function getTripHardBrakingEvent(imei, trip_number, energization_number) {
                   order by t1.gps_utc_time asc"
 
 
-  db.buildParams(params, "imei", TYPES.BigInt, imei);
+  db.buildParams(params, "imei", TYPES.VarChar, imei);
   db.buildParams(params, "tripNumber", TYPES.Int, trip_number);
   db.buildParams(params, "energizationNumber", TYPES.Int, energization_number);
 

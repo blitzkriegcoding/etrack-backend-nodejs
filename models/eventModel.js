@@ -14,7 +14,7 @@ function excessiveRpmEvent(imei, from_timestamp, to_timestamp) {
 	                          and @toTimestamp \
                             order by t1.gps_utc_time asc";
 
-  db.buildParams(params, "imei", TYPES.BigInt, imei);
+  db.buildParams(params, "imei", TYPES.VarChar, imei);
   db.buildParams(params, "fromTimestamp", TYPES.DateTime2, from_timestamp);
   db.buildParams(params, "toTimestamp", TYPES.DateTime2, to_timestamp);
 
@@ -35,7 +35,7 @@ function speedingEndEvent(imei, from_timestamp, to_timestamp/*, callback*/) {
                   and t1.gps_utc_time between @fromTimestamp \
                   and @toTimestamp order by t1.gps_utc_time asc";
 
-  db.buildParams(params, "imei", TYPES.BigInt, imei);
+  db.buildParams(params, "imei", TYPES.VarChar, imei);
   db.buildParams(params, "fromTimestamp", TYPES.DateTime2, from_timestamp);
   db.buildParams(params, "toTimestamp", TYPES.DateTime2, to_timestamp);
 
@@ -61,7 +61,7 @@ function excessiveRalentiEvent(imei, from_timestamp, to_timestamp/*, callback*/)
                   and t1.gps_utc_time between @fromTimestamp \
                   and @toTimestamp order by t1.gps_utc_time asc";
 
-  db.buildParams(params, "imei", TYPES.BigInt, imei);
+  db.buildParams(params, "imei", TYPES.VarChar, imei);
   db.buildParams(params, "fromTimestamp", TYPES.DateTime2, from_timestamp);
   db.buildParams(params, "toTimestamp", TYPES.DateTime2, to_timestamp);
 
@@ -82,7 +82,7 @@ function coastingEvent(imei, from_timestamp, to_timestamp/*, callback*/) {
                   and t1.gps_utc_time between @fromTimestamp \
                   and @toTimestamp order by t1.gps_utc_time asc";
 
-  db.buildParams(params, "imei", TYPES.BigInt, imei);
+  db.buildParams(params, "imei", TYPES.VarChar, imei);
   db.buildParams(params, "fromTimestamp", TYPES.DateTime2, from_timestamp);
   db.buildParams(params, "toTimestamp", TYPES.DateTime2, to_timestamp);
 
@@ -103,7 +103,7 @@ function faultCodeEvent(imei, from_timestamp, to_timestamp/*, callback*/) {
                   and t1.gps_utc_time between @fromTimestamp \
                   and @toTimestamp order by t1.gps_utc_time asc";
 
-  db.buildParams(params, "imei", TYPES.BigInt, imei);
+  db.buildParams(params, "imei", TYPES.VarChar, imei);
   db.buildParams(params, "fromTimestamp", TYPES.DateTime2, from_timestamp);
   db.buildParams(params, "toTimestamp", TYPES.DateTime2, to_timestamp);
 
@@ -124,7 +124,7 @@ function suddenAccelerationEvent(imei, from_timestamp, to_timestamp/*, callback*
                   and t1.gps_utc_time between @fromTimestamp \
                   and @toTimestamp order by t1.gps_utc_time asc";
 
-  db.buildParams(params, "imei", TYPES.BigInt, imei);
+  db.buildParams(params, "imei", TYPES.VarChar, imei);
   db.buildParams(params, "fromTimestamp", TYPES.DateTime2, from_timestamp);
   db.buildParams(params, "toTimestamp", TYPES.DateTime2, to_timestamp);
 
@@ -145,7 +145,7 @@ function hardBrakingEvent(imei, from_timestamp, to_timestamp/*, callback*/) {
                   and t1.gps_utc_time between @fromTimestamp \
                   and @toTimestamp order by t1.gps_utc_time asc";
 
-  db.buildParams(params, "imei", TYPES.BigInt, imei);
+  db.buildParams(params, "imei", TYPES.VarChar, imei);
   db.buildParams(params, "fromTimestamp", TYPES.DateTime2, from_timestamp);
   db.buildParams(params, "toTimestamp", TYPES.DateTime2, to_timestamp);
 
@@ -163,7 +163,7 @@ function fuelLeakEvent(imei, from_timestamp, to_timestamp/*, callback*/) {
                   and t1.gps_utc_time between @fromTimestamp \
                   and @toTimestamp order by t1.gps_utc_time asc";
 
-  db.buildParams(params, "imei", TYPES.BigInt, imei);
+  db.buildParams(params, "imei", TYPES.VarChar, imei);
   db.buildParams(params, "fromTimestamp", TYPES.DateTime2, from_timestamp);
   db.buildParams(params, "toTimestamp", TYPES.DateTime2, to_timestamp);
 
